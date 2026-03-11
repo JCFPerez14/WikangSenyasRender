@@ -1,0 +1,31 @@
+BACKEND SETUP & DEPENDENCY EXPLANATION
+========================================
+
+Successfully Working Dependencies:
+----------------------------------
+To run the backend server, we found the following specific version combination is required to avoid conflicts between MediaPipe, TensorFlow, and Protobuf:
+
+*   python: 3.12 (System Version)
+*   protobuf: 4.25.3 (Crucial: 5.x causes errors with TensorFlow/MediaPipe)
+*   mediapipe: 0.10.13 (Crucial: 0.10.14+ often requires Protobuf 5.x)
+*   tensorflow-cpu: 2.19.1 (or compatible 2.x version)
+*   flask: Latest
+*   flask-cors: Latest
+*   opencv-python: Latest compatible
+*   numpy: <2.0.0 (Required by current TensorFlow/MediaPipe versions)
+
+Steps Taken to Fix Issues:
+--------------------------
+1.  **Initial Error**: We encountered `module 'mediapipe' has no attribute 'solutions'` with the latest `mediapipe` (0.10.32).
+2.  **Version Conflicts**: 
+    *   We tried downgrading `mediapipe` to 0.10.14, but it required `protobuf>=4.25.3`.
+    *   We tried `protobuf` 5.28.1, but it conflicted with `tensorflow` which requires `protobuf<5`.
+    *   We found that `mediapipe` 0.10.13 is the sweet spot that works well with `protobuf` 4.25.3.
+3.  **Virtual Environment**: We created a `venv` to assume a clean slate and avoid conflicts with global packages.
+4.  **Hardware Optimization**: We switched to `tensorflow-cpu` to ensure a lighter and more compatible installation for the server environment.
+
+How to Run:
+-----------
+Always run the server using the virtual environment python executable:
+> cd server
+> .\venv\Scripts\python.exe app.py

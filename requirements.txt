@@ -1,0 +1,8 @@
+flask
+flask-cors
+opencv-python-headless
+tensorflow==2.18.1
+mediapipe==0.10.21
+numpy
+scikit-learn
+gunicorn
