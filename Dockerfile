@@ -1,7 +1,7 @@
 # Production Dockerfile for FSL Sign Recognition API
 # Optimized for Hostinger VPS deployment
 
-FROM python:3.12-slim
+FROM python:3.11-slim-bullseye
 
 # Prevent Python from writing .pyc files and buffering stdout
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -11,8 +11,7 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /app
 
 # Install system dependencies required for OpenCV and MediaPipe
-RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     libgl1-mesa-glx \
     libglib2.0-0 \
     libsm6 \
