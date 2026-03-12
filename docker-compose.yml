@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  asl-api:
+  fsl-api:
     build: .
     container_name: fsl-api
     ports:
